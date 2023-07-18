@@ -57,14 +57,18 @@ function WebBuilder() {
 
   return (
     <>
-    <div class="panel__top">
-        <div class="panel__basic-actions"></div>
+    <div className="panel__top">
+        <div className="panel__basic-actions"></div>
     </div>
-      <div id="gjs"></div>
+    <div className='editor-row'>
+        <div className='editor-canvas'>
+          <div id="gjs"></div>
+        </div>
+        <div className="panel__right">
+          <div className="layers-container"></div>
+        </div>
+    </div>
       <div id="blocks"></div>
-      <div className="panel__right">
-        <div className="layers-container"></div>
-      </div>
     </>
   );
 }
