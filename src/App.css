@@ -28,6 +28,10 @@
   position: initial;
 }
 
+.panel__switcher {
+  position: initial;
+}
+
 
 .editor-row {
   display: flex;
