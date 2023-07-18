@@ -32,6 +32,26 @@ const grapeJsConfig = {
       },
     ],
   },
+  layerManager: {
+    appendTo: '.layers-container',
+  },
+  panels: {
+    defaults: [
+      {
+        id: 'layers',
+        el: '.panel__right',
+        resizable: {
+          maxDim: 350,
+          minDim: 200,
+          tc: 0,
+          cl: 1,
+          cr: 0,
+          bc: 0,
+          keyWidth: 'flex-basis',
+        },
+      },
+    ],
+  },
 };
 
 export default grapeJsConfig;
