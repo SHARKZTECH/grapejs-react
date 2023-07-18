@@ -47,7 +47,7 @@
 }
 
 .panel__right {
-  flex-basis: 230px;
+  flex-basis: 330px;
   position: relative;
   overflow-y: auto;
 }

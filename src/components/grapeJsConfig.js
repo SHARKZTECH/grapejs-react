@@ -50,6 +50,7 @@ const grapeJsConfig = {
           keyWidth: 'flex-basis',
         },
       },
+      
     ],
   },
 
@@ -58,6 +59,7 @@ const grapeJsConfig = {
     panels: {
       defaults: [
         // ...
+
         {
           id: 'panel-switcher',
           el: '.panel__switcher',
