@@ -3,7 +3,6 @@ import './App.css'
 import WebBuilder from './components/WebBuilder'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>

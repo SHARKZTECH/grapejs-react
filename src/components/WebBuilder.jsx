@@ -1,72 +1,63 @@
-import { useEffect } from "react";
+import React, { useEffect, useRef } from 'react';
 import 'grapesjs/dist/css/grapes.min.css';
 import grapesjs from 'grapesjs';
-// If you need plugins, put them below the main grapesjs script
-// import 'grapesjs-some-plugin';
 
 function WebBuilder() {
+  const editorRef = useRef(null);
 
+  useEffect(() => {
+    const editor = grapesjs.init({
+      container: editorRef.current,
+      height: '300px',
+      width: 'auto',
+      storageManager: false,
+      panels: { defaults: [] },
+      blockManager: {
+        appendTo: '#blocks',
+        blocks: [
+          {
+            id: 'section',
+            label: '<b>Section</b>',
+            attributes: { class: 'gjs-block-section' },
+            content: `<section>
+              <h1>This is a simple title</h1>
+              <div>This is just a Lorem text: Lorem ipsum dolor sit amet</div>
+            </section>`,
+          },
+          {
+            id: 'text',
+            label: 'Text',
+            content: '<div data-gjs-type="text">Insert your text here</div>',
+          },
+          {
+            id: 'image',
+            label: 'Image',
+            select: true,
+            content: { type: 'image' },
+            activate: true,
+          },
+        ],
+      },
+    });
 
- useEffect(() => {
-   loadGrapeJs();
- },[])
+    const h1Component = editor.DomComponents.addComponent({
+      tagName: 'h1',
+      content: 'Hello World Component!',
+    });
 
- const loadGrapeJs=async()=>{
-  const editor=await grapesjs.init({
-            // Indicate where to init the editor. You can also pass an HTMLElement
-            container: '#gjs',
-            // Get the content for the canvas directly from the element
-            // As an alternative we could use: `components: '<h1>Hello World Component!</h1>'`,
-            fromElement: true,
-            // Size of the editor
-            height: '500px',
-            width: 'auto',
-            blockManager: {
-              appendTo: '#blocks',
-              blocks: [
-                {
-                  id: 'section', // id is mandatory
-                  label: '<b>Section</b>', // You can use HTML/SVG inside labels
-                  attributes: { class:'gjs-block-section' },
-                  content: `<section>
-                    <h1>This is a simple title</h1>
-                    <div>This is just a Lorem text: Lorem ipsum dolor sit amet</div>
-                  </section>`,
-                }, {
-                  id: 'text',
-                  label: 'Text',
-                  content: '<div data-gjs-type="text">Insert your text here</div>',
-                }, {
-                  id: 'image',
-                  label: 'Image',
-                  // Select the component once it's dropped
-                  select: true,
-                  // You can pass components as a JSON instead of a simple HTML string,
-                  // in this case we also use a defined component type `image`
-                  content: { type: 'image' },
-                  // This triggers `active` event on dropped components and the `image`
-                  // reacts by opening the AssetManager
-                  activate: true,
-                }
-              ]
-            },
-            // Disable the storage manager for the moment
-            storageManager: false,
-            // Avoid any default panel
-            panels: { defaults: [] },
- });
+    editor.setComponents([h1Component]);
+
+    return () => {
+      editor.destroy();
+    };
+  }, []);
+
+  return (
+    <>
+      <div ref={editorRef} />
+      <div id="blocks" />
+    </>
+  );
 }
 
-
- return (
-  <>
-    <div id="gjs">
-      <h1>Hello World Component!</h1>
-    </div>
-    <div id="blocks">
-      blocks
-    </div>
-  </>
- );
-}
 export default WebBuilder;
